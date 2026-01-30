@@ -1,0 +1,232 @@
+webinar-landing-page/
+│
+├── index.html
+├── style.css
+└── script.js
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HSA Basics Webinar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <header class="hero">
+      <h1>HSA Basics: What Every Employee Should Know</h1>
+      <p class="subtitle">
+        CE Webinar covering the fundamentals of Health Savings Accounts
+      </p>
+
+      <div class="event-details">
+        <span>📅 Feb 2</span>
+        <span>⏰ 7:30 AM EST</span>
+        <span>🎤 Speaker: Eddie</span>
+      </div>
+
+      <div id="countdown" class="countdown"></div>
+    </header>
+
+    <section class="about">
+      <h2>About the Webinar</h2>
+      <p>
+        Health Savings Accounts can be powerful tools, but only if you understand
+        the rules. This session breaks down HSA basics in plain language so you can
+        use your benefits confidently and avoid costly mistakes.
+      </p>
+    </section>
+
+    <section class="learn">
+      <h2>What You’ll Learn</h2>
+      <ul>
+        <li>What an HSA is and how it works</li>
+        <li>Eligibility rules and contribution limits</li>
+        <li>HSA vs FSA differences</li>
+        <li>Common HSA mistakes to avoid</li>
+        <li>Smart ways to use HSA funds</li>
+      </ul>
+    </section>
+
+    <section class="speaker">
+      <h2>Meet the Speaker</h2>
+      <p class="speaker-name">Eddie</p>
+      <p class="speaker-bio">
+        Employee benefits professional with hands-on experience educating employees
+        and employers on HSAs and consumer-driven healthcare plans.
+      </p>
+    </section>
+
+    <section class="registration">
+      <h2>Register for the Webinar</h2>
+
+      <form id="registrationForm">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email Address" required />
+        <button type="submit">Save My Seat</button>
+      </form>
+
+      <p id="formMessage" class="form-message"></p>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 Your Company Name. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fa;
+  color: #1f2933;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.hero {
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #4b5563;
+}
+
+.event-details {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.countdown {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #0f766e;
+}
+
+section {
+  background: #ffffff;
+  padding: 30px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+.learn ul {
+  padding-left: 20px;
+}
+
+.learn li {
+  margin-bottom: 8px;
+}
+
+.speaker-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.registration form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.registration input {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+}
+
+.registration button {
+  padding: 12px;
+  background: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.registration button:hover {
+  background: #1e40af;
+}
+
+.form-message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #047857;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+}
+// Countdown Timer
+const countdownElement = document.getElementById("countdown");
+
+// Webinar date: Feb 2, 7:30 AM EST
+const webinarDate = new Date("February 2, 2026 07:30:00 GMT-0500").getTime();
+
+const countdownInterval = setInterval(() => {
+  const now = new Date().getTime();
+  const distance = webinarDate - now;
+
+  if (distance < 0) {
+    clearInterval(countdownInterval);
+    countdownElement.innerHTML = "Webinar is live!";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdownElement.innerHTML =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}, 1000);
+
+// Form handling (frontend only)
+const form = document.getElementById("registrationForm");
+const message = document.getElementById("formMessage");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+
+  // This is where you later connect Mailchimp / HubSpot / API
+  console.log("Registered:", { name, email });
+
+  message.innerText =
+    "You’re registered! A confirmation email will be sent shortly.";
+
+  form.reset();
+});
